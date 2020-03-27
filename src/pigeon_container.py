@@ -6,45 +6,33 @@ from src.pigeon import Pigeon
 
 
 class PigeonContainer:
-    def __init__(self):
-        self._pigeons = []
+    def __init__(self, pigeons: List = None):
+        if not pigeons:
+            self._pigeons: List[Pigeon] = []
+        else:
+            self._pigeons = pigeons
 
-    def add(self, pigeon: Pigeon):
+    def add(self, pigeon: Pigeon) -> None:
         self._pigeons.append(pigeon)
 
-    def __getitem__(self, i):
-        return self._pigeons[i]
+    def __setitem__(self, key, value) -> None:
+        self._pigeons[key] = value
+
+    def __getitem__(self, key) -> Pigeon:
+        return self._pigeons[key]
 
     def __len__(self) -> int:
         return len(self._pigeons)
 
-    @staticmethod
-    def to_str(items: List) -> str:
+    def __str__(self) -> str:
         result = ['pigeons: \n']
-        size = len(items)
+        size = len(self._pigeons)
         if size == 0:
             return 'No pigeons added'
         for index in range(size):
-            result.append('{} \n'.format(str(items[index])))
-        return ''.join([item for item in result])
+            result.append('{} \n'.format(str(self._pigeons[index])))
+        return ''.join(result)
 
-    def __str__(self):
-        return PigeonContainer.to_str(self._pigeons)
-
-    def sort(self):
+    def sort(self) -> PigeonContainer:
         sorted_pigeons = sorted(self._pigeons)
-        return PigeonContainer.to_str(sorted_pigeons)
-
-    # def get_permutations(self):
-    #     size = len(self._pigeons)
-    #     perms = 0
-    #
-    #     for i in range(size):
-    #         for j in range(size - i - 1):
-    #             if self._pigeons[j + 1] < self._pigeons[j]:
-    #                 temp = self._pigeons[j]
-    #                 self._pigeons[j] = self._pigeons[j + 1]
-    #                 self._pigeons[j + 1] = temp
-    #                 perms += 1
-    #     return perms
-
+        return PigeonContainer(sorted_pigeons)

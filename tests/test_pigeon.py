@@ -1,3 +1,5 @@
+from typing import List
+
 import pytest
 from src.pigeon import Pigeon
 
@@ -8,7 +10,7 @@ def default_pigeon():
 
 
 def test_init(default_pigeon):
-    assert 1 == default_pigeon.index
+    assert default_pigeon.index == 1
     assert default_pigeon.velocity == 1
 
 
@@ -16,10 +18,16 @@ def test_str(default_pigeon):
     assert 'index: 1, velocity: 1' == str(default_pigeon)
 
 
-def test_lt():
+def test_lt_true():
     first_pig = Pigeon(1, 1)
     sec_pig = Pigeon(2, 2)
     assert first_pig < sec_pig
+
+
+def test_lt_false():
+    first_pig = Pigeon(2, 2)
+    sec_pig = Pigeon(1, 1)
+    assert not first_pig < sec_pig
 
 
 def test_eq():
@@ -28,7 +36,12 @@ def test_eq():
     assert first_pig == sec_pig
 
 
-def test_unequal():
+def test_unequal_same_class():
     first_pig = Pigeon(1, 1)
     sec_pig = Pigeon(2, 2)
-    assert first_pig != sec_pig
+    assert not first_pig == sec_pig
+
+
+def test_unequal_diff_class():
+    pigeon = Pigeon(1, 1)
+    assert not pigeon == List

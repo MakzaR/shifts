@@ -48,7 +48,10 @@ def test_to_str_one_pigeon(container, default_pigeon):
 def test_to_str_multiple_pigeons(container, default_pigeon):
     container.add(default_pigeon)
     container.add(Pigeon(2, 2))
-    assert str(container) == 'pigeons: \n' 'index: 1, velocity: 1 \nindex: 2, velocity: 2 \n'
+    assert (
+        str(container) == 'pigeons: \n'
+        'index: 1, velocity: 1 \nindex: 2, velocity: 2 \n'
+    )
 
 
 def test_to_str_no_pigeons(container):
@@ -61,6 +64,6 @@ def test_sort(container):
     container.add(Pigeon(3, 6))
     container.add(Pigeon(4, 1))
     assert (
-        container.sort() == 'pigeons: \n'
+        str(container.sort()) == 'pigeons: \n'
         'index: 4, velocity: 1 \nindex: 3, velocity: 6 \nindex: 1, velocity: 10 \nindex: 2, velocity: 20 \n'
     )

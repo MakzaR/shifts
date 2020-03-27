@@ -6,13 +6,11 @@ class Pigeon:
     def __eq__(self, other) -> bool:
         self_dict = self.__dict__
         other_dict = other.__dict__
-        if type(other) is not Pigeon or len(self_dict) != len(other_dict):
-            return False
-        if self_dict != other_dict:
-            return False
-        return True
+        if isinstance(other, Pigeon):
+            return self_dict == other_dict
+        return False
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
         return self.velocity < other.velocity
 
     def __str__(self) -> str:
