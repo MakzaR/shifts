@@ -1,16 +1,11 @@
 from __future__ import annotations
 
-from typing import List
-
 from src.pigeon import Pigeon
 
 
 class PigeonContainer:
-    def __init__(self, pigeons: List = None):
-        if not pigeons:
-            self._pigeons: List[Pigeon] = []
-        else:
-            self._pigeons = pigeons
+    def __init__(self):
+        self._pigeons = []
 
     def add(self, pigeon: Pigeon) -> None:
         self._pigeons.append(pigeon)
@@ -30,9 +25,5 @@ class PigeonContainer:
         if size == 0:
             return 'No pigeons added'
         for index in range(size):
-            result.append('{} \n'.format(str(self._pigeons[index])))
+            result.append(f'{str(self._pigeons[index])} \n')
         return ''.join(result)
-
-    def sort(self) -> PigeonContainer:
-        sorted_pigeons = sorted(self._pigeons)
-        return PigeonContainer(sorted_pigeons)

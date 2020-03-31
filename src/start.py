@@ -47,7 +47,7 @@ def parse_arguments(args):
     return parser.parse_args(args)
 
 
-def get_args():
+def get_args() -> List:
     args = []
     parser = parse_arguments(sys.argv[1:])
     args.append(parser.number)

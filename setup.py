@@ -7,10 +7,10 @@ setuptools.setup(
     name="pigeon_task",
     version="0.0.1",
     author="Moker",
-    description="A small example script to count pigeon permutations",
+    description="A small example script to count pigeon shifts",
     packages=setuptools.find_packages(),
     entry_points={
         'console_scripts':
-            ['count = src.start:main']
+            ['count_shifts = src.start:main']
     }
 )

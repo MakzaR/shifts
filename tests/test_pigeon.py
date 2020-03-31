@@ -1,5 +1,3 @@
-from typing import List
-
 import pytest
 from src.pigeon import Pigeon
 
@@ -30,6 +28,12 @@ def test_lt_false():
     assert not first_pig < sec_pig
 
 
+def test_lt_same_pigeon():
+    first_pig = Pigeon(1, 1)
+    sec_pig = Pigeon(1, 1)
+    assert not first_pig < sec_pig
+
+
 def test_eq():
     first_pig = Pigeon(1, 1)
     sec_pig = Pigeon(1, 1)
@@ -44,4 +48,4 @@ def test_unequal_same_class():
 
 def test_unequal_diff_class():
     pigeon = Pigeon(1, 1)
-    assert not pigeon == List
+    assert not pigeon == 1
