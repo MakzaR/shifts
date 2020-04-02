@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 import pytest
 from src.pigeon import Pigeon
 from src.pigeon_container import PigeonContainer
@@ -18,12 +20,14 @@ def test_check_wrong_args():
 
 
 def test_printing_with_right_args():
-    args = [3, 10, [1, 1, 1]]
+    Args = namedtuple('Args', ['number', 'distance', 'velocities'])
+    args = Args(3, 10, [10, 10, 10])
     assert get_result(args) == 0
 
 
 def test_printing_with_wrong_args():
-    args = [3, 10, [1, 1, 1, 1]]
+    Args = namedtuple('Args', ['number', 'distance', 'velocities'])
+    args = Args(0, 0, [10, 10, 10])
     assert get_result(args) == 'use --help'
 
 

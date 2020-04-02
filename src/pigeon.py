@@ -10,6 +10,3 @@ class Pigeon:
 
     def __lt__(self, other) -> bool:
         return self.velocity < other.velocity
-
-    def __str__(self) -> str:
-        return f'index: {self.index}, velocity: {self.velocity}'

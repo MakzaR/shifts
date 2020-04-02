@@ -11,19 +11,15 @@ class PigeonContainer:
         self._pigeons.append(pigeon)
 
     def __setitem__(self, key, value) -> None:
-        self._pigeons[key] = value
+        try:
+            self._pigeons[key] = value
+        except Exception:
+            raise IndexError
 
     def __getitem__(self, key) -> Pigeon:
+        if key >= len(self):
+            raise IndexError
         return self._pigeons[key]
 
     def __len__(self) -> int:
         return len(self._pigeons)
-
-    def __str__(self) -> str:
-        result = ['pigeons: \n']
-        size = len(self._pigeons)
-        if size == 0:
-            return 'No pigeons added'
-        for index in range(size):
-            result.append(f'{str(self._pigeons[index])} \n')
-        return ''.join(result)

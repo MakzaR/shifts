@@ -19,6 +19,18 @@ def _add_default_pigeon(container, default_pigeon):
 
 
 @pytest.mark.usefixtures('_add_default_pigeon')
+def test_key_not_int(container, default_pigeon):
+    with pytest.raises(IndexError):
+        container['i'] = default_pigeon
+
+
+@pytest.mark.usefixtures('_add_default_pigeon')
+def test_key_not_exist(container, default_pigeon):
+    with pytest.raises(IndexError):
+        assert container[1] == default_pigeon
+
+
+@pytest.mark.usefixtures('_add_default_pigeon')
 def test_add_one_pigeon(container, default_pigeon):
     assert container[0] == default_pigeon
 
@@ -43,21 +55,3 @@ def test_len_one_pigeon(container, default_pigeon):
 def test_len_multiple_pigeons(container):
     container.add(Pigeon(2, 1))
     assert len(container) == 2
-
-
-@pytest.mark.usefixtures('_add_default_pigeon')
-def test_to_str_one_pigeon(container):
-    assert str(container) == 'pigeons: \n' 'index: 1, velocity: 1 \n'
-
-
-@pytest.mark.usefixtures('_add_default_pigeon')
-def test_to_str_multiple_pigeons(container):
-    container.add(Pigeon(2, 2))
-    assert (
-        str(container) == 'pigeons: \n'
-        'index: 1, velocity: 1 \nindex: 2, velocity: 2 \n'
-    )
-
-
-def test_to_str_no_pigeons(container):
-    assert str(container) == 'No pigeons added'

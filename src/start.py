@@ -1,5 +1,6 @@
 import argparse
 import sys
+from collections import namedtuple
 from typing import List
 
 from src.pigeon import Pigeon
@@ -30,11 +31,11 @@ def start(number: int, distance: int, velocities: List) -> int:
     return get_permutations(container, distance)
 
 
-def check_args(*args) -> bool:
+def check_args(number, distance, velocities) -> bool:
     return (
-        args[0] is not None
-        and args[1] is not None
-        and (args[2] is not None and len(args[2]) == args[0])
+        number is not None
+        and distance is not None
+        and (velocities is not None and len(velocities) == number)
     )
 
 
@@ -47,19 +48,17 @@ def parse_arguments(args):
     return parser.parse_args(args)
 
 
-def get_args() -> List:
-    args = []
+def get_args():
     parser = parse_arguments(sys.argv[1:])
-    args.append(parser.number)
-    args.append(parser.distance)
-    args.append(parser.velocities)
+    Args = namedtuple('Args', ['number', 'distance', 'velocities'])
+    args = Args(parser.number, parser.distances, parser.velocities)
 
     return args
 
 
 def get_result(args):
-    if check_args(args[0], args[1], args[2]):
-        return start(args[0], args[1], args[2])
+    if check_args(args.number, args.distance, args.velocities):
+        return start(args.number, args.distance, args.velocities)
     return 'use --help'
 
 

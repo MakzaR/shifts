@@ -10,6 +10,7 @@ venv:
 	$(VENV)/bin/python -m pip install --upgrade pip
 	$(VENV)/bin/python -m pip install poetry
 	$(VENV)/bin/poetry install
+	$(VENV)/bin/python setup.py install
 
 test:
 	$(VENV)/bin/pytest -v tests
